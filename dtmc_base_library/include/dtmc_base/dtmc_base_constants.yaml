@@ -1,0 +1,235 @@
+prefix: DTMC_BASE_CONSTANTS_
+
+base_constants:
+  - name: TASKER_MODEL_NUMBER_START
+    value: 21000
+  - name: INTERVAL_MODEL_NUMBER_START
+    value: 21100
+  - name: NETPORTAL_MODEL_NUMBER_START
+    value: 21200
+  - name: SENSOR_MODEL_NUMBER_START
+    value: 21400
+  - name: DOTSTAR_MODEL_NUMBER_START
+    value: 21500
+  - name: GPIOPIN_MODEL_NUMBER_START
+    value: 21600
+  - name: IOX_MODEL_NUMBER_START
+    value: 21700
+  - name: FRAMER_MODEL_NUMBER_START
+    value: 21800
+  - name: NVBLOB_MODEL_NUMBER_START
+    value: 21900
+  - name: DISPLAY_MODEL_NUMBER_START
+    value: 22000
+  - name: ADC_MODEL_NUMBER_START
+    value: 22100
+  - name: HTTPSERVER_MODEL_NUMBER_START
+    value: 22200
+  - name: TIMESERIES_MODEL_NUMBER_START
+    value: 22300
+
+
+  - name: NETPROFILE_TOPIC
+    value: "dtworld/netprofile"
+
+  - name: NETPROFILE_ROLE_BRIDGE
+    value: "bridge"
+  - name: NETPROFILE_ROLE_SENSOR
+    value: "sensor"
+  - name: NETPROFILE_ROLE_DISPLAY
+    value: "display"
+
+  - name: NETPROFILE_STATE_UP
+    value: "up"
+  - name: NETPROFILE_STATE_DOWN
+    value: "down"
+
+# Enum definitions
+enums:
+
+  - name: TASKER_MODEL
+    base_constant: TASKER_MODEL_NUMBER_START
+    values:
+      - name: DUMMY
+        value: 1
+      - name: ESPIDF
+        value: 2
+      - name: ZEPHYR
+        value: 3
+      - name: LINUX
+        value: 4
+        
+  - name: INTERVAL_MODEL
+    base_constant: INTERVAL_MODEL_NUMBER_START
+    values:
+      - name: SCHEDULED
+        value: 1
+      - name: ESPIDF
+        value: 2
+      - name: ZEPHYR
+        value: 3
+
+  - name: NETPORTAL_MODEL
+    base_constant: NETPORTAL_MODEL_NUMBER_START
+    values:
+      - name: DUMMY
+        value: 1
+      - name: SHM
+        value: 2
+      - name: MQTT_ESPIDF
+        value: 3
+      - name: BTLE
+        value: 4
+      - name: TCP
+        value: 5
+      - name: UDP
+        value: 6
+      - name: MATTER
+        value: 7
+      - name: THREAD
+        value: 8
+      - name: MOSQUITTO
+        value: 9
+      - name: COAP
+        value: 10
+      - name: IOX
+        value: 11
+      - name: CAN
+        value: 12
+      - name: STREAM
+        value: 13
+
+  - name: SENSOR_MODEL
+    base_constant: SENSOR_MODEL_NUMBER_START
+    values:
+      - name: DUMMY
+        value: 1
+      - name: ZEPHYR
+        value: 2
+
+  - name: DOTSTAR_MODEL
+    base_constant: DOTSTAR_MODEL_NUMBER_START
+    values:
+      - name: DUMMY
+        value: 1
+      - name: ESPIDF
+        value: 2
+      - name: ZEPHYR
+        value: 3
+
+  - name: GPIOPIN_MODEL
+    base_constant: GPIOPIN_MODEL_NUMBER_START
+    values:
+      - name: DUMMY
+        value: 1
+      - name: ESPIDF
+        value: 2
+      - name: ZEPHYR
+        value: 3
+      - name: PICOSDK
+        value: 4
+      - name: RPILINUX
+        value: 5
+      - name: PYNQ
+        value: 6
+      - name: ARDUINO
+        value: 7
+
+  - name: IOX_MODEL
+    base_constant: IOX_MODEL_NUMBER_START
+    values:
+      - name: DUMMY
+        value: 1
+      - name: ESPIDF_UART
+        value: 2
+      - name: ESPIDF_CAN
+        value: 3
+      - name: ZEPHYR_UARTIRQ
+        value: 4
+      - name: ZEPHYR_CAN
+        value: 5
+      - name: PICOSDK_UART
+        value: 6
+      - name: LINUX_CAN
+        value: 7
+      - name: LINUX_TTY
+        value: 8
+      - name: LINUX_MODBUS_TCP_MASTER
+        value: 8
+      - name: LINUX_MODBUS_TCP_SLAVE
+        value: 9
+      - name: LINUX_MODBUS_RTU_MASTER
+        value: 10
+      - name: LINUX_MODBUS_RTU_SLAVE
+        value: 11
+      - name: ZEPHYR_MODBUS_MASTER
+        value: 12
+      - name: ZEPHYR_MODBUS_SLAVE
+        value: 13
+      - name: ESPIDF_MODBUS_SLAVE
+        value: 14
+      - name: LINUX_TCP
+        value: 15
+      - name: LINUX_WEBSOCKET
+        value: 16
+
+  - name: FRAMER_MODEL
+    base_constant: FRAMER_MODEL_NUMBER_START
+    values:
+      - name: SIMPLE
+        value: 1
+      - name: CRC
+        value: 2
+      - name: COMPRESSED
+        value: 3
+      - name: ENCRYPTED
+        value: 4
+
+  - name: NVBLOB_MODEL
+    base_constant: NVBLOB_MODEL_NUMBER_START
+    values:
+      - name: ESPIDF_NVS
+        value: 2
+      - name: ZEPHYR_FLASH
+        value: 3
+      - name: PICOSDK_FLASH
+        value: 4
+      - name: LINUX_FILE
+        value: 5
+
+  - name: DISPLAY_MODEL
+    base_constant: DISPLAY_MODEL_NUMBER_START
+    values:
+      - name: LINUX_SDL2
+        value: 2
+      - name: LVGL
+        value: 3
+      - name: ESPIDF_ILI9341
+        value: 4
+
+  - name: ADC_MODEL
+    base_constant: ADC_MODEL_NUMBER_START
+    values:
+      - name: ESPIDF_ONESHOT
+        value: 2
+      - name: ZEPHYR_SAADC
+        value: 3
+
+
+  - name: HTTPSERVER_MODEL
+    base_constant: HTTPSERVER_MODEL_NUMBER_START
+    values:
+      - name: LINUX_SOCKET
+        value: 1
+
+  - name: TIMESERIES_MODEL
+    base_constant: TIMESERIES_MODEL_NUMBER_START
+    values:
+      - name: STEADY
+        value: 1
+      - name: SINE
+        value: 2
+      - name: DAMPED_SINE
+        value: 3
+      - name: BROWNGRAV
+        value: 4
