@@ -115,7 +115,12 @@ dttimeseries_sine_to_string(dttimeseries_sine_t* self DTTIMESERIES_TO_STRING_ARG
     dterr_t* dterr = NULL;
     DTERR_ASSERT_NOT_NULL(self);
     DTERR_ASSERT_NOT_NULL(out_string);
-    snprintf(out_string, out_string_capacity, "sine frequency=%f amplitude=%f offset=%f", self->frequency, self->amplitude, self->offset);
+    snprintf(out_string,
+      out_string_capacity,
+      "sine frequency=%f amplitude=%f offset=%f",
+      self->frequency,
+      self->amplitude,
+      self->offset);
 
 cleanup:
     return dterr;

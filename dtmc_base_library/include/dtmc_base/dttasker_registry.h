@@ -18,11 +18,13 @@
 #include <dtcore/dtguidable_pool.h>
 
 #include <dtcore/dterr.h>
+#include <dtmc_base/dtlock.h>
 #include <dtmc_base/dttasker.h>
 
 typedef struct dttasker_registry_t
 {
     dtguidable_pool_t pool;
+    dtlock_handle lock;
     bool is_initialized;
 } dttasker_registry_t;
 
@@ -33,6 +35,9 @@ dttasker_registry_init(dttasker_registry_t* self);
 
 extern dterr_t*
 dttasker_registry_insert(dttasker_registry_t* self, dttasker_handle tasker_handle);
+
+extern dterr_t*
+dttasker_registry_remove(dttasker_registry_t* self, dttasker_handle tasker_handle);
 
 extern dterr_t*
 dttasker_registry_format_as_table(dttasker_registry_t* self, char** out_str);

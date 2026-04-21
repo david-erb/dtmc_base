@@ -1,7 +1,10 @@
 # dtmc_base_library/CMakeLists.txt
 
-include(${CMAKE_CURRENT_LIST_DIR}/../dthelpers.cmake)
-dthelpers_glob(MY_SOURCES dt*.c)
+if(NOT DEFINED CMAKE_SCRIPT_MODE_FILE AND NOT DEFINED CMAKE_FIND_PACKAGE_NAME)
+    file(GLOB MY_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/dt*.c)
+else()
+    file(GLOB MY_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/dt*.c)
+endif()
 
 # ---- Zephyr -------------------------------------------------
 if (ZEPHYR_BASE OR DEFINED Zephyr_FOUND)
@@ -9,6 +12,7 @@ if (ZEPHYR_BASE OR DEFINED Zephyr_FOUND)
     zephyr_library_named(dtmc_base_library)
     
     zephyr_library_sources(${MY_SOURCES})
+    zephyr_library_compile_definitions(_GNU_SOURCE)   # to get M_PI in math.h
 
     zephyr_library_include_directories(
         ${DTMC_BASE_DIR}/dtmc_base_library/include
@@ -28,6 +32,10 @@ elseif(DEFINED ENV{IDF_PATH})
         REQUIRES dtcore_library
     )
 
+
+    set_property(TARGET ${COMPONENT_LIB} APPEND PROPERTY LINK_INTERFACE_MULTIPLICITY 3)
+
+# ---- Linux -------------------------------------------------
 else()
     add_library(dtmc_base_library STATIC ${MY_SOURCES})
     target_include_directories(dtmc_base_library PUBLIC ${DTMC_BASE_DIR}/dtmc_base_library/include)

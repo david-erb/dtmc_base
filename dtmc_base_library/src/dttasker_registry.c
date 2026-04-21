@@ -9,6 +9,7 @@
 #include <dtcore/dtlog.h>
 #include <dtcore/dtstr.h>
 
+#include <dtmc_base/dtlock.h>
 #include <dtmc_base/dttasker.h>
 #include <dtmc_base/dttasker_registry.h>
 
@@ -29,6 +30,8 @@ dttasker_registry_init(dttasker_registry_t* self)
 
     memset(self, 0, sizeof(*self));
 
+    DTERR_C(dtlock_create(&self->lock));
+
     // max number of entries in task table
     DTERR_C(dtguidable_pool_init(&self->pool, 30));
 
@@ -44,6 +47,7 @@ dterr_t*
 dttasker_registry_insert(dttasker_registry_t* self, dttasker_handle tasker_handle)
 {
     dterr_t* dterr = NULL;
+    bool lock_needs_release = false;
 
     if (!self || !tasker_handle)
         return dterr_new(DTERR_BADARG, DTERR_LOC, NULL, "bad args self=%p tasker_handle=%p", self, tasker_handle);
@@ -54,22 +58,57 @@ dttasker_registry_insert(dttasker_registry_t* self, dttasker_handle tasker_handl
     dtguid_t guid;
     DTERR_C(dtguidable_get_guid((dtguidable_handle)tasker_handle, &guid));
 
+    DTERR_C(dtlock_acquire(self->lock));
+    lock_needs_release = true;
+
     dtguidable_handle found = NULL;
     DTERR_C(dtguidable_pool_search(&self->pool, &guid, &found));
     if (found)
     {
-        char guid_str[37];
-        dtguid_to_string(&guid, guid_str, sizeof(guid_str));
-
-        return dterr_new(
-          DTERR_EXISTS, DTERR_LOC, NULL, "tasker named \"%s\" has same GUID \"%s\" already in registry", info.name, guid_str);
+        // already registered — treat as a no-op so callers can safely call insert
+        // multiple times (e.g. dtruntime_register_tasks called repeatedly)
+        lock_needs_release = false;
+        DTERR_C(dtlock_release(self->lock));
+        goto cleanup;
     }
 
     DTERR_C(dtguidable_pool_insert(&self->pool, (dtguidable_handle)tasker_handle));
 
+    lock_needs_release = false;
+    DTERR_C(dtlock_release(self->lock));
+
 cleanup:
+    if (lock_needs_release)
+        dterr = dterr_append(dterr, dtlock_release(self->lock));
     if (dterr != NULL)
         dterr = dterr_new(DTERR_FAIL, DTERR_LOC, dterr, "unable to insert task in tasker registry");
+    return dterr;
+}
+
+// -----------------------------------------------------------------------------
+dterr_t*
+dttasker_registry_remove(dttasker_registry_t* self, dttasker_handle tasker_handle)
+{
+    dterr_t* dterr = NULL;
+    bool lock_needs_release = false;
+
+    if (!self || !tasker_handle)
+        return dterr_new(DTERR_BADARG, DTERR_LOC, NULL, "bad args self=%p tasker_handle=%p", self, tasker_handle);
+
+    if (!self->is_initialized)
+        goto cleanup;
+
+    DTERR_C(dtlock_acquire(self->lock));
+    lock_needs_release = true;
+
+    DTERR_C(dtguidable_pool_remove(&self->pool, (dtguidable_handle)tasker_handle));
+
+    lock_needs_release = false;
+    DTERR_C(dtlock_release(self->lock));
+
+cleanup:
+    if (lock_needs_release)
+        dterr = dterr_append(dterr, dtlock_release(self->lock));
     return dterr;
 }
 
@@ -152,17 +191,7 @@ dttasker_registry_dispose(dttasker_registry_t* self)
     if (!self)
         return;
 
-    for (uint32_t i = 0; i < self->pool.max_items; i++)
-    {
-        dtguidable_handle item = self->pool.items[i];
-        if (!item)
-            continue;
-
-        dttasker_handle tasker_handle = (dttasker_handle)item;
-
-        dttasker_dispose(tasker_handle);
-    }
-
     dtguidable_pool_dispose(&self->pool);
+    dtlock_dispose(self->lock);
     memset(self, 0, sizeof(*self));
 }

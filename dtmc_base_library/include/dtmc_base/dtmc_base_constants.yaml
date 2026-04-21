@@ -27,6 +27,8 @@ base_constants:
     value: 22200
   - name: TIMESERIES_MODEL_NUMBER_START
     value: 22300
+  - name: MCP4728_MODEL_NUMBER_START
+    value: 22400
 
 
   - name: NETPROFILE_TOPIC
@@ -233,3 +235,18 @@ enums:
         value: 3
       - name: BROWNGRAV
         value: 4
+      - name: BEAT
+        value: 5
+
+  - name: MCP4728_MODEL
+    base_constant: MCP4728_MODEL_NUMBER_START
+    values:
+      - name: ESPIDF
+        value: 1
+      - name: ZEPHYR
+        value: 2
+      - name: PICOSDK
+        value: 3
+      - name: LINUX
+        value: 4
+        

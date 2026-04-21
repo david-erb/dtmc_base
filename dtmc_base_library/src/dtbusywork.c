@@ -1,8 +1,4 @@
-#include <errno.h>
 #include <inttypes.h>
-#include <pthread.h>
-#include <stdatomic.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include <dtmc_base/dtmc_base_constants.h>
@@ -32,7 +28,6 @@ typedef struct dtbusywork_worker_t
     dttasker_handle tasker_handle;
     dtsemaphore_handle trigger_semaphore_handle;
     int32_t worker_number;
-    atomic_uint stop_flag;
     char worker_name[32];
 } dtbusywork_worker_t;
 
@@ -44,7 +39,6 @@ typedef struct dtbusywork_manager_t
     dtbusywork_worker_t workers[DTBUSYWORK_MAX_WORKERS];
     dtsemaphore_handle trigger_semaphore_handle;
     dttasker_registry_t tasker_registry;
-    bool all_are_properly_stopped;
 } dtbusywork_manager_t;
 
 static char*
@@ -79,13 +73,15 @@ dtbusywork__tasker_entrypoint(void* self_arg, dttasker_handle tasker_handle)
     DTERR_C(dttasker_ready(tasker_handle));
 
     // wait for trigger before we start getting busy
-    while (!atomic_load_explicit(&self->stop_flag, memory_order_acquire))
+    for (;;)
     {
+        bool should_stop = false;
+        DTERR_C(dttasker_poll(tasker_handle, &should_stop));
+        if (should_stop)
+            goto cleanup;
+
         bool was_timeout = false;
-        DTERR_C(dtsemaphore_wait( //
-          self->trigger_semaphore_handle,
-          1,
-          &was_timeout));
+        DTERR_C(dtsemaphore_wait(self->trigger_semaphore_handle, 10, &was_timeout));
         if (!was_timeout)
             break;
     }
@@ -97,9 +93,9 @@ dtbusywork__tasker_entrypoint(void* self_arg, dttasker_handle tasker_handle)
 
     for (;;)
     {
-        uint32_t stop_flag = atomic_load_explicit(&self->stop_flag, memory_order_relaxed);
-
-        if (stop_flag)
+        bool should_stop = false;
+        DTERR_C(dttasker_poll(tasker_handle, &should_stop));
+        if (should_stop)
         {
             dtlog_debug(TAG, "%s observed stop=true, exiting", _worker_to_string(self, worker_str, sizeof(worker_str)));
             break;
@@ -185,7 +181,6 @@ dtbusywork_add_worker(dtbusywork_handle self_handle, int32_t core, dttasker_prio
         worker->worker_number = i + 1;
         sprintf(worker->worker_name, "busywork-%" PRId32, worker->worker_number);
         worker->config = &self->config;
-        atomic_init(&worker->stop_flag, false);
         worker->trigger_semaphore_handle = self->trigger_semaphore_handle;
 
         dttasker_config_t c = { 0 };
@@ -284,73 +279,35 @@ dtbusywork_stop(dtbusywork_handle self_handle)
     for (int i = DTBUSYWORK_MAX_WORKERS - 1; i >= 0; i--)
     {
         dtbusywork_worker_t* worker = &self->workers[i];
-        // not added?
         if (worker->config == NULL)
             continue;
-        atomic_store_explicit(&worker->stop_flag, true, memory_order_release);
 
-        // give semaphore once for each added worker in case they never started working
+        DTERR_C(dttasker_stop(worker->tasker_handle));
+
+        // unblock workers still waiting in the pre-trigger semaphore wait
         DTERR_C(dtsemaphore_post(self->trigger_semaphore_handle));
+
 #ifndef dtlog_debug
         dtlog_debug(TAG, "requested stop on worker %s", _worker_to_string(worker, worker_str, sizeof(worker_str)));
 #endif
     }
 
-    // let everybody stop
-    dtruntime_sleep_milliseconds(100);
-
-    dtlog_debug(TAG, "disposing workers after sending stop signal and sleeping a bit");
-
-    bool all_stopped = true;
-
-    // dispose the worker taskers
     for (int i = DTBUSYWORK_MAX_WORKERS - 1; i >= 0; i--)
     {
         dtbusywork_worker_t* worker = &self->workers[i];
-        // not added?
         if (worker->config == NULL)
             continue;
 
-        dttasker_handle tasker_handle = worker->tasker_handle;
-        if (tasker_handle == NULL)
-        {
-            dtlog_debug(TAG, "worker %s already disposed, skipping", _worker_to_string(worker, worker_str, sizeof(worker_str)));
-            continue;
-        }
+        DTERR_C(dttasker_join(worker->tasker_handle, 1000, NULL));
 
-        dttasker_info_t info;
-        DTERR_C(dttasker_get_info(tasker_handle, &info));
-
-        const char* status = dttasker_state_to_string(info.status);
-        if (info.status != STOPPED)
-        {
-            dtlog_debug(TAG,
-              "%s task status %s but should be stopped by now",
-              _worker_to_string(worker, worker_str, sizeof(worker_str)),
-              status);
-
-            all_stopped = false;
-
-            continue;
-        }
-
-        dtlog_debug(
-          TAG, "disposing worker %s task status %s", _worker_to_string(worker, worker_str, sizeof(worker_str)), status);
-
-        // dispose task (this is supposed to wait for it to stop)
-        dttasker_dispose(worker->tasker_handle);
-
-        memset(worker, 0, sizeof(dtbusywork_worker_t));
-
-        all_stopped = all_stopped && true;
+#ifndef dtlog_debug
+        dtlog_debug(TAG, "joined worker %s", _worker_to_string(worker, worker_str, sizeof(worker_str)));
+#endif
     }
 
-    self->all_are_properly_stopped = all_stopped;
-
-    dtlog_debug(TAG, "finished stopping and disposing workers");
+    dtlog_debug(TAG, "finished stopping workers");
 
 cleanup:
-
     return dterr;
 }
 
@@ -372,24 +329,34 @@ cleanup:
 void
 dtbusywork_dispose(dtbusywork_handle self_handle)
 {
-    dtbusywork_manager_t* self = NULL;
-    self = (dtbusywork_manager_t*)self_handle;
+    dtbusywork_manager_t* self = (dtbusywork_manager_t*)self_handle;
     if (self == NULL)
         return;
 
-    // stop any busy tasks and dispose them
+    // stop signals and joins threads; dispose then frees the task structs
     dtbusywork_stop(self_handle);
 
-    dttasker_registry_dispose(&self->tasker_registry);
+#ifndef dtlog_debug
+    char worker_str[128];
+#endif
 
-    if (self->all_are_properly_stopped)
+    for (int i = DTBUSYWORK_MAX_WORKERS - 1; i >= 0; i--)
     {
-        dtlog_debug(TAG, "all busywork tasks were properly stopped");
+        dtbusywork_worker_t* worker = &self->workers[i];
+        if (worker->tasker_handle == NULL)
+            continue;
+
+#ifndef dtlog_debug
+        dtlog_debug(TAG, "disposing worker %s", _worker_to_string(worker, worker_str, sizeof(worker_str)));
+#endif
+
+        dttasker_dispose(worker->tasker_handle);
+        memset(worker, 0, sizeof(dtbusywork_worker_t));
     }
-    else
-    {
-        dtlog_debug(TAG, "some busywork tasks may not have been properly stopped");
-        dtsemaphore_dispose(self->trigger_semaphore_handle);
-        dtheaper_free(self);
-    }
+
+    dtlog_debug(TAG, "all busywork tasks disposed");
+
+    dttasker_registry_dispose(&self->tasker_registry);
+    dtsemaphore_dispose(self->trigger_semaphore_handle);
+    dtheaper_free(self);
 }
