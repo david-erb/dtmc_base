@@ -1,0 +1,898 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://david-erb.github.io/dtmc_base/functions/index.html">
+      
+      
+        <link rel="prev" href="../index.html">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Functions - dtmc_base Library</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="dtmc_base Library" class="md-header__button md-logo" aria-label="dtmc_base Library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dtmc_base Library
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Functions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/david-erb/dtmc_base/blob/main" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="dtmc_base Library" class="md-nav__button md-logo" aria-label="dtmc_base Library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    dtmc_base Library
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/david-erb/dtmc_base/blob/main" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Functions</h1>
+
+<details class="note">
+<summary><code>dtadc</code>&nbsp;&nbsp;&nbsp;Analog-to-digital converter facade with model-numbered dispatch.</summary>
+<p>Defines a vtable interface for ADC devices: activate (with a per-scan
+callback), deactivate, status query, and string formatting. A global
+registry maps integer model numbers to concrete vtables, allowing
+platform-specific ADC implementations (ESP-IDF one-shot, Zephyr SAADC,
+etc.) to be swapped without changing call sites. Companion macros
+DTADC_DECLARE_API and DTADC_INIT_VTABLE reduce boilerplate when wiring
+in a new implementation.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtadc.h" target="_blank">dtmc_base_library/include/dtmc_base/dtadc.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtadc_scan</code>&nbsp;&nbsp;&nbsp;Single ADC acquisition record with binary serialization.</summary>
+<p>Represents one ADC sampling event: a nanosecond timestamp, a monotonic
+sequence number, and a variable-length array of int32 channel readings.
+The packx functions serialize and deserialize the scan to and from a
+compact binary format, enabling transmission over serial links or network
+portals with explicit offset tracking and bounds checking.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtadc_scan.h" target="_blank">dtmc_base_library/include/dtmc_base/dtadc_scan.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtadc_scanlist</code>&nbsp;&nbsp;&nbsp;Batched ADC scan collection with binary serialization.</summary>
+<p>Groups a variable number of dtadc_scan_t records and their shared channel
+count into a single transferable unit. Provides init, pack-length query,
+pack, unpack, and dispose, following the same packx conventions used
+throughout the library. Suited for batching ADC samples before
+transmission or logging.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtadc_scanlist.h" target="_blank">dtmc_base_library/include/dtmc_base/dtadc_scanlist.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtbuffer_distributor</code>&nbsp;&nbsp;&nbsp;Bidirectional dtbuffer relay over a netportal topic.</summary>
+<p>Connects a dtbufferqueue to a dtnetportal subscription on a named topic.
+Incoming messages are chunked for transmission via dtchunker and placed
+into the queue; outbound calls pull from the queue and publish. Separating
+queuing and transport concerns lets producers and consumers run on
+different tasks without coupling them to a specific network backend.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtbuffer_distributor.h" target="_blank">dtmc_base_library/include/dtmc_base/dtbuffer_distributor.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtbufferqueue</code>&nbsp;&nbsp;&nbsp;Thread-safe FIFO queue for dtbuffer_t pointers.</summary>
+<p>Provides bounded-capacity put and get operations with millisecond timeouts
+and optional overwrite-on-full behavior. The opaque handle hides the
+underlying synchronization mechanism, allowing the same queue API to work
+across RTOS and POSIX environments. Used throughout the library to decouple
+producers from consumers across task boundaries.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtbufferqueue.h" target="_blank">dtmc_base_library/include/dtmc_base/dtbufferqueue.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtbusywork</code>&nbsp;&nbsp;&nbsp;CPU load generator for per-core utilization measurement.</summary>
+<p>Spawns configurable background tasks that spin continuously at the lowest
+scheduler priority, consuming idle CPU time. A snapshot function samples
+cumulative dttasker CPU-usage counters; subtracting busy-idle from total
+elapsed time yields an accurate utilization figure even on RTOS schedulers
+that lack built-in profiling. Summarize produces a human-readable report.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtbusywork.h" target="_blank">dtmc_base_library/include/dtmc_base/dtbusywork.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtcpu</code>&nbsp;&nbsp;&nbsp;Platform-specific CPU timing, busy-wait, and identification.</summary>
+<p>Provides a lightweight abstraction over hardware timing: a mark-and-elapsed
+pair for microsecond-resolution interval measurement, a busy-wait primitive,
+a random integer generator, and a permanent unique-identifier string for
+the running CPU or platform instance. Implemented separately for each
+supported target (ESP-IDF, Zephyr, Linux, RP2040, etc.).</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtcpu.h" target="_blank">dtmc_base_library/include/dtmc_base/dtcpu.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtdebouncer</code>&nbsp;&nbsp;&nbsp;Time-qualified debounce filter for binary signals.</summary>
+<p>Accepts raw boolean samples and emits a stable state only after the
+candidate has held steady for a configurable millisecond interval. An
+optional callback fires on each accepted transition. The instance tracks
+separate counts for raw edges, debounced edges, rising transitions, and
+falling transitions, supporting both callback-driven and polled usage
+patterns without GPIO or platform dependencies.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtdebouncer.h" target="_blank">dtmc_base_library/include/dtmc_base/dtdebouncer.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtdisplay</code>&nbsp;&nbsp;&nbsp;Display device facade with model-numbered vtable dispatch.</summary>
+<p>Defines a uniform interface for blitting raster images to a display,
+attaching and detaching from hardware resources, and creating raster
+buffers that match the display's pixel format. A global registry maps
+integer model numbers to concrete vtables, supporting SDL2, LVGL, and
+hardware LCD backends (e.g., ILI9341) without changes at call sites.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtdisplay.h" target="_blank">dtmc_base_library/include/dtmc_base/dtdisplay.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtdotstar</code>&nbsp;&nbsp;&nbsp;APA102/DotStar RGB LED strip facade with model-numbered dispatch.</summary>
+<p>Defines a vtable interface for driving addressable LED strips: connect
+(initialize the bus), dither (map linear lumen values to gamma-corrected
+RGB), transmit (push the current frame to hardware), enqueue (stage a
+frame for deferred transmission), and a post callback for async completion
+notification. A global registry allows platform implementations (ESP-IDF
+SPI, Zephyr, etc.) to be substituted at initialization time.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtdotstar.h" target="_blank">dtmc_base_library/include/dtmc_base/dtdotstar.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtdotstar_dummy</code>&nbsp;&nbsp;&nbsp;Null-hardware test double for the dtdotstar LED interface.</summary>
+<p>Implements the full dtdotstar vtable (connect, dither, transmit, enqueue,
+set_post_cb, dispose) without any SPI or DMA dependency. Call counters
+on the struct let unit tests verify that the correct sequence of
+operations was invoked without requiring physical APA102/DotStar hardware.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtdotstar_dummy.h" target="_blank">dtmc_base_library/include/dtmc_base/dtdotstar_dummy.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtflowmonitor</code>&nbsp;&nbsp;&nbsp;Data-flow rate monitor with heartbeat logging and timeout alerting.</summary>
+<p>Tracks the arrival time and byte count of incoming data streams. A
+configurable no-data timeout triggers a warning log when the stream goes
+silent. Periodic heartbeat events record throughput (scan count and byte
+count) since the last interval, providing a lightweight diagnostic trace
+for serial or network data paths without external tooling.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtflowmonitor.h" target="_blank">dtmc_base_library/include/dtmc_base/dtflowmonitor.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtframer</code>&nbsp;&nbsp;&nbsp;Message framing facade with model-numbered vtable dispatch.</summary>
+<p>Defines a uniform interface for encoding a topic-and-payload pair into a
+byte stream and for decoding an incoming byte stream back into topic and
+payload, delivering complete messages via a callback. The opaque handle
+and global vtable registry allow framing algorithms (simple, CRC,
+compressed, encrypted) to be swapped at initialization without changing
+surrounding transport or application code.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtframer.h" target="_blank">dtmc_base_library/include/dtmc_base/dtframer.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtframer_simple</code>&nbsp;&nbsp;&nbsp;Lightweight topic-version-payload framer without CRC or compression.</summary>
+<p>A concrete dtframer implementation that encodes topic, protocol version,
+and payload into a framed byte stream and decodes it back. A framing mode
+hint (STREAM vs. BUS) tunes maximum topic and payload sizes for UART-style
+streams or CAN-style short messages. Suited for environments where the
+transport layer already provides error detection.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtframer_simple.h" target="_blank">dtmc_base_library/include/dtmc_base/dtframer_simple.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtgpiopin</code>&nbsp;&nbsp;&nbsp;Cross-platform GPIO pin facade with interrupt support.</summary>
+<p>Defines a vtable-dispatched interface for a single configured GPIO pin:
+attach an ISR callback with edge selection, enable or disable interrupt
+delivery, read or write the logic level, and format pin state as a string.
+A global model-number registry allows platform implementations (ESP-IDF,
+Zephyr, PicoSDK, RPi Linux, PYNQ, Arduino) to register and be resolved
+at runtime without recompiling call sites.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtgpiopin.h" target="_blank">dtmc_base_library/include/dtmc_base/dtgpiopin.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtgpiopin_dummy</code>&nbsp;&nbsp;&nbsp;Deterministic GPIO pin stand-in for unit testing.</summary>
+<p>Implements the full dtgpiopin vtable (attach, enable, read, write,
+concat_format, dispose) in software. Configurable behavior flags control
+whether writes trigger edge callbacks and whether enabling the pin emits
+an initial edge, making it possible to exercise interrupt-driven logic
+under a single-threaded test runner without real GPIO hardware or SDKs.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtgpiopin_dummy.h" target="_blank">dtmc_base_library/include/dtmc_base/dtgpiopin_dummy.h</a></p>
+</details>
+<details class="note">
+<summary><code>dthttpd</code>&nbsp;&nbsp;&nbsp;HTTP server facade with vtable dispatch and POST callback model.</summary>
+<p>Defines a uniform interface for running an embedded HTTP server: loop
+(accept connections until stopped), stop (signal shutdown), join (wait
+for clean exit with timeout), and dispose. A typed POST callback delivers
+request path, payload, and response-buffer ownership to the application
+without binding it to a specific server library or network stack.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dthttpd.h" target="_blank">dtmc_base_library/include/dtmc_base/dthttpd.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtinterval</code>&nbsp;&nbsp;&nbsp;Periodic callback timer facade with model-numbered dispatch.</summary>
+<p>Defines a vtable interface for a repeating interval timer: bind a callback,
+start firing, and pause. The opaque handle and global registry allow
+concrete implementations (wall-clock scheduled, ESP-IDF timer, Zephyr
+timer) to be selected at initialization. The callback receives a context
+pointer and a should_pause output flag, enabling self-cancellation without
+external coordination.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtinterval.h" target="_blank">dtmc_base_library/include/dtmc_base/dtinterval.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtinterval_scheduled</code>&nbsp;&nbsp;&nbsp;Wall-clock periodic callback timer implementing the dtinterval facade.</summary>
+<p>Fires a registered callback at a fixed millisecond period using
+dtruntime_now_milliseconds and dtruntime_sleep_milliseconds.</p>
+<p>It's named "scheduled" because it is running on task schedule, not an ISR or hardware timer.
+Suitable for any platform that exposes a millisecond wall-clock without dedicated timer peripherals.</p>
+<p>Each sleep is trimmed by the time already consumed inside the callback, preventing
+execution overhead from accumulating into the period. If the callback
+overruns by more than one interval, missed ticks are skipped and the
+schedule resumes on the original phase.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtinterval_scheduled.h" target="_blank">dtmc_base_library/include/dtmc_base/dtinterval_scheduled.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtiox</code>&nbsp;&nbsp;&nbsp;Byte-stream I/O exchange facade for UART, CAN, and socket backends.</summary>
+<p>Defines a vtable interface for non-blocking asynchronous byte I/O: attach
+and detach hardware resources, enable or disable the channel, read received
+bytes from an internal buffer, write bytes for asynchronous transmission,
+and bind a semaphore for RX-ready notification. A global model-number
+registry supports a wide range of backends (ESP-IDF UART/CAN, Zephyr,
+PicoSDK, Linux TTY/CAN/TCP, Modbus RTU and TCP) without changing
+surrounding transport code.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtiox.h" target="_blank">dtmc_base_library/include/dtmc_base/dtiox.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtiox_dummy</code>&nbsp;&nbsp;&nbsp;In-memory test double for the dtiox byte-stream I/O interface.</summary>
+<p>Implements the full dtiox vtable (attach, detach, enable, read, write,
+set_rx_semaphore, concat_format, dispose) using internal ring buffers.
+An optional loopback flag causes writes to appear immediately as received
+data. The push_rx_bytes helper injects arbitrary byte sequences to exercise
+receive-path logic without physical UART or socket hardware.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtiox_dummy.h" target="_blank">dtmc_base_library/include/dtmc_base/dtiox_dummy.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtiox_modbus</code>&nbsp;&nbsp;&nbsp;Wire-level Modbus holding-register protocol for blob exchange.</summary>
+<p>Defines the register map, command codes, and status values for a
+master/slave blob-transfer protocol layered on top of Modbus TCP/RTU
+holding registers. Masters write blobs by issuing PUT_BLOB and poll for
+slave-originated data with GIVE_ME_ANY_DATA. A helper macro converts
+byte counts to the minimum register count needed to carry the payload.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtiox_modbus.h" target="_blank">dtmc_base_library/include/dtmc_base/dtiox_modbus.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtlightsensor</code>&nbsp;&nbsp;&nbsp;Ambient light sensor facade with model-numbered vtable dispatch.</summary>
+<p>Defines a minimal interface for light sensors: activate the sensor, take
+an int64 lux sample, and dispose. A global registry maps model numbers to
+concrete vtables, enabling dummy (test) and Zephyr sensor implementations
+to be resolved at runtime without compile-time coupling.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtlightsensor.h" target="_blank">dtmc_base_library/include/dtmc_base/dtlightsensor.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtlightsensor_dummy</code>&nbsp;&nbsp;&nbsp;Null-hardware test double for the dtlightsensor interface.</summary>
+<p>Implements the dtlightsensor vtable (activate, sample, dispose) without
+physical sensor hardware. Invocation counters on the struct allow unit
+tests to confirm that the expected call sequence occurred, using the same
+create/init/configure lifecycle as production sensor implementations.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtlightsensor_dummy.h" target="_blank">dtmc_base_library/include/dtmc_base/dtlightsensor_dummy.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtlock</code>&nbsp;&nbsp;&nbsp;Platform-portable mutual exclusion lock facade.</summary>
+<p>Wraps a system mutex behind an opaque handle with create, acquire, release,
+and dispose operations. The thin interface hides POSIX pthread_mutex,
+FreeRTOS mutex, and other platform-specific primitives behind a common
+API, keeping higher-level modules free of RTOS or OS headers.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtlock.h" target="_blank">dtmc_base_library/include/dtmc_base/dtlock.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtmanifold</code>&nbsp;&nbsp;&nbsp;Fixed-capacity publish/subscribe message router.</summary>
+<p>Routes dtbuffer_t payloads to multiple named subscribers using a
+statically allocated subject table (up to 10 subjects, 10 recipients
+each). An optional external semaphore serializes subscribe/unsubscribe
+mutations while leaving delivery callbacks unlocked for maximum
+throughput. Each subscriber receives its own heap copy of the published
+buffer and is responsible for disposing it.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtmanifold.h" target="_blank">dtmc_base_library/include/dtmc_base/dtmanifold.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtmc_base</code>&nbsp;&nbsp;&nbsp;Library flavor and other library identification macros.</summary>
+<p>Provides DTMC_BASE_FLAVOR string constant that
+identifies the library build at runtime.  Also includes the appropriate version file. Used by dtruntime and diagnostic
+routines to report the active library variant in environment tables and
+log output.</p>
+<p>This file is processed by tooling in the automated build system.
+It's important to maintain the structure and formatting of the version macros for compatibility with version parsing scripts.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtmc_base.h" target="_blank">dtmc_base_library/include/dtmc_base/dtmc_base.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtmc_base_constants</code>&nbsp;&nbsp;&nbsp;Centralized model numbers and shared string constants.</summary>
+<p>Auto-generated from YAML. Assigns unique integer identifiers to every
+concrete implementation of each vtable-based facade (tasker, interval,
+netportal, ADC, display, IOX, framer, NV blob, timeseries, etc.) across
+all supported platforms (ESP-IDF, Zephyr, PicoSDK, Linux, BLE, Matter).
+Also defines the shared topic and role strings used by the netprofile
+subsystem.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtmc_base_constants.h" target="_blank">dtmc_base_library/include/dtmc_base/dtmc_base_constants.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtmcp4728</code>&nbsp;&nbsp;&nbsp;Facade for the MCP4728 quad 12-bit DAC over I2C.</summary>
+<p>Defines a vtable-dispatched interface for a Microchip MCP4728 four-channel
+12-bit DAC. Each channel is independently configured with an output value, voltage reference and gain.</p>
+<p>A global model-number registry allows platform
+implementations to register and be resolved at runtime without recompiling
+call sites.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtmcp4728.h" target="_blank">dtmc_base_library/include/dtmc_base/dtmcp4728.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtmcp4728_dummy</code>&nbsp;&nbsp;&nbsp;Null-hardware test double for the dtmcp4728 DAC interface.</summary>
+<p>Implements the full dtmcp4728 vtable (attach, detach, fast_write, multi_write,
+sequential_write, single_write_eeprom, general_call_reset, general_call_wakeup,
+general_call_software_update, read_all, to_string, dispose) without any I2C
+or hardware dependency. Call counters and captured channel state let unit tests
+verify the correct sequence of operations without physical MCP4728 hardware.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtmcp4728_dummy.h" target="_blank">dtmc_base_library/include/dtmc_base/dtmcp4728_dummy.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtmodbus_helpers</code>&nbsp;&nbsp;&nbsp;Byte-to-register packing utilities for Modbus payloads.</summary>
+<p>Provides two functions that convert between a byte array and an array of
+16-bit Modbus holding registers, packing two bytes per register in network
+byte order. Used by both master and slave implementations to prepare and
+extract blob payloads exchanged over the dtiox_modbus wire protocol.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtmodbus_helpers.h" target="_blank">dtmc_base_library/include/dtmc_base/dtmodbus_helpers.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtnetbridge</code>&nbsp;&nbsp;&nbsp;Two-portal message bridge with queue-buffered forwarding.</summary>
+<p>Connects a north and south dtnetportal through paired dtbufferqueues,
+forwarding messages received on registered topics from one side to the
+other. A cancellation semaphore coordinates clean shutdown. Encapsulates
+the forwarding task lifecycle so that bridging two network backends
+(e.g., MQTT to CAN) requires only topic registration and a single
+activate call.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtnetbridge.h" target="_blank">dtmc_base_library/include/dtmc_base/dtnetbridge.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtnetportal</code>&nbsp;&nbsp;&nbsp;Publish/subscribe network portal facade with vtable dispatch.</summary>
+<p>Defines a transport-agnostic interface for topic-based messaging: activate
+the connection, subscribe to a named topic with a receive callback, publish
+a dtbuffer payload, and query connection metadata. A global model-number
+registry supports over a dozen backends (MQTT, CoAP, BLE, TCP, UDP,
+Modbus, CAN, shared memory, stream) without changing the application layer.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtnetportal.h" target="_blank">dtmc_base_library/include/dtmc_base/dtnetportal.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtnetportal_iox</code>&nbsp;&nbsp;&nbsp;Netportal implementation over a framed serial IOX channel.</summary>
+<p>Adapts a dtiox byte-stream device and a dtframer codec into a full
+dtnetportal (activate, subscribe, publish, get_info, dispose). An RX task
+drains the IOX FIFO and delivers decoded topic-payload pairs to subscribers.
+The rx_drain breakout function allows testing the decode path without a
+live RTOS task scheduler.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtnetportal_iox.h" target="_blank">dtmc_base_library/include/dtmc_base/dtnetportal_iox.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtnetportal_shm</code>&nbsp;&nbsp;&nbsp;Shared-memory netportal implementation.</summary>
+<p>Implements the dtnetportal interface using POSIX shared memory as the
+transport, enabling low-latency inter-process publish/subscribe on Linux
+without network overhead. Follows the standard create/init/configure
+lifecycle and registers its vtable for model-number dispatch via the
+dtnetportal registry.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtnetportal_shm.h" target="_blank">dtmc_base_library/include/dtmc_base/dtnetportal_shm.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtnetprofile</code>&nbsp;&nbsp;&nbsp;Network node metadata record with incremental assembly and serialization.</summary>
+<p>Accumulates descriptive attributes for a networked node into newline-
+separated string lists covering names, component versions, URLs, roles,
+subscriptions, publications, and states. Provides pack/unpack for binary
+transport and a to_string formatter for diagnostics. The incremental add
+API lets each subsystem append its own entries without pre-allocating a
+fixed-size structure.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtnetprofile.h" target="_blank">dtmc_base_library/include/dtmc_base/dtnetprofile.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtnetprofile_distributor</code>&nbsp;&nbsp;&nbsp;Publishes and collects dtnetprofile records over a netportal.</summary>
+<p>Subscribes to the network-profile topic on a dtnetportal and places
+arriving serialized profiles into a dtbufferqueue. The distribute function
+serializes a local dtnetprofile_t and publishes it on the same topic.
+Separating serialization, queuing, and transport keeps each layer
+independently testable.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtnetprofile_distributor.h" target="_blank">dtmc_base_library/include/dtmc_base/dtnetprofile_distributor.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtnvblob</code>&nbsp;&nbsp;&nbsp;Non-volatile binary blob storage facade with model-numbered dispatch.</summary>
+<p>Defines a minimal interface for persistent binary storage: read and write
+an opaque byte blob via an opaque handle. A global registry maps model
+numbers to concrete flash/NVS backends (ESP-IDF NVS, Zephyr flash, PicoSDK
+flash, Linux file) so higher-level modules such as dtradioconfig can access
+persistent data without platform conditionals.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtnvblob.h" target="_blank">dtmc_base_library/include/dtmc_base/dtnvblob.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtpackable_object_distributor</code>&nbsp;&nbsp;&nbsp;Distributes packable objects over a netportal topic.</summary>
+<p>Adapts the dtpackable serialization interface to topic-based network
+transport via a dtnetportal and a dtbufferqueue. Large objects are
+transparently chunked using dtchunker before transmission. The collect
+operation blocks until a complete object arrives or a timeout expires,
+decoupling the producer's serialization rate from the consumer's
+processing rate.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtpackable_object_distributor.h" target="_blank">dtmc_base_library/include/dtmc_base/dtpackable_object_distributor.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtradioconfig</code>&nbsp;&nbsp;&nbsp;WiFi and MQTT credential bundle with NV persistence.</summary>
+<p>Holds the node name, WiFi SSID/password, and MQTT host, port, and
+credentials required to connect an embedded node to a broker. The
+structure is read from and written to a dtnvblob handle for persistence
+across reboots, and exposes packx serialization for over-the-air delivery
+or factory provisioning.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtradioconfig.h" target="_blank">dtmc_base_library/include/dtmc_base/dtradioconfig.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtruntime</code>&nbsp;&nbsp;&nbsp;Runtime environment inspection, timing, and device reporting.</summary>
+<p>Provides the library flavor and version strings, millisecond wall-clock
+access and sleep, QEMU detection, and formatted table output for both the
+software environment and the registered hardware devices. Task registration
+with a dttasker_registry allows the runtime to enumerate and report all
+active tasks in a single diagnostic call.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtruntime.h" target="_blank">dtmc_base_library/include/dtmc_base/dtruntime.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtsemaphore</code>&nbsp;&nbsp;&nbsp;Cross-platform counting semaphore facade.</summary>
+<p>Wraps platform semaphore primitives (POSIX, FreeRTOS, Zephyr) behind a
+common create/wait/post/dispose API with millisecond-resolution timeouts.
+The opaque handle and standard dterr_t error return make it a building
+block for higher-level synchronization throughout the library, including
+dtmanifold, dthttpd, dtnetportal, and dtbufferqueue.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtsemaphore.h" target="_blank">dtmc_base_library/include/dtmc_base/dtsemaphore.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttasker</code>&nbsp;&nbsp;&nbsp;Cross-platform task facade with priority bands and CPU accounting.</summary>
+<p>Manages the full lifecycle of a task: create, start, ready signaling,
+cooperative stop request, join with timeout, and dispose. A three-band
+priority system (background, normal, urgent) maps to platform-specific
+scheduler priorities at implementation time. The info structure exposes
+stack usage, core affinity, cumulative CPU microseconds, and percent
+utilization, enabling runtime diagnostics without platform-specific
+profiling tools.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttasker.h" target="_blank">dtmc_base_library/include/dtmc_base/dttasker.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttasker_registry</code>&nbsp;&nbsp;&nbsp;Global registry for tracking active dttasker instances.</summary>
+<p>Maintains a dtguidable_pool of dttasker handles, supporting insertion,
+name-based lookup, task count, iteration, and formatted table output. A
+global singleton (dttasker_registry_global_instance) lets dtruntime
+enumerate all known tasks for diagnostics without requiring a registry
+pointer to be threaded through the call stack.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttasker_registry.h" target="_blank">dtmc_base_library/include/dtmc_base/dttasker_registry.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttimeseries</code>&nbsp;&nbsp;&nbsp;Time-series data source facade with model-numbered vtable dispatch.</summary>
+<p>Defines a minimal interface for any source that returns a double-precision
+value keyed by a microsecond timestamp: configure (via a key-value list),
+read (at a given time), to_string, and dispose. The vtable registry allows
+multiple backend models (steady-state, interpolating, recorded) to be
+selected at runtime and composed into larger signal-processing pipelines.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttimeseries.h" target="_blank">dtmc_base_library/include/dtmc_base/dttimeseries.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttimeseries_beat</code>&nbsp;&nbsp;&nbsp;Beat-frequency signal source implementing the dttimeseries facade.</summary>
+<p>Evaluates offset + amplitude * (sin(2<em>pi</em>f1<em>t) + sin(2</em>pi<em>f2</em>t)) for a
+microsecond timestamp t converted to seconds.</p>
+<p>Produces a continuously cycling waveform whose amplitude envelope pulses at
+the beat rate |f1-f2| Hz while the carrier oscillates at (f1+f2)/2 Hz.
+Selecting different f1/f2 pairs per channel gives each channel a distinct
+visual rhythm with no decay. Follows the standard create/configure/read
+lifecycle and registers its vtable for polymorphic dispatch alongside other
+dttimeseries backends.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttimeseries_beat.h" target="_blank">dtmc_base_library/include/dtmc_base/dttimeseries_beat.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttimeseries_browngrav</code>&nbsp;&nbsp;&nbsp;Brownian random-walk signal source implementing the dttimeseries facade.</summary>
+<p>Produces a continuous double-precision value stream by advancing a gravitationally-attracted
+Brownian walk one step per read call; the microsecond timestamp argument is not consumed.</p>
+<p>Provides a bounded, continuously-varying synthetic signal useful for sensor simulation and
+test fixture generation. A configurable restoring force, noise intensity, and seed control
+the character of the walk. An offset and scale factor -- defaulting to 0 and 1.0 -- map the
+raw integer output to any target numeric range without external post-processing.</p>
+<p>Follows the standard create/configure/read lifecycle and registers its vtable for polymorphic
+dispatch alongside other dttimeseries backends.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttimeseries_browngrav.h" target="_blank">dtmc_base_library/include/dtmc_base/dttimeseries_browngrav.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttimeseries_damped_sine</code>&nbsp;&nbsp;&nbsp;Exponentially decaying sinusoidal time series implementing the dttimeseries facade.</summary>
+<p>Returns amplitude * e^(-decay * t) * sin(2π * frequency * t) for a given microsecond
+timestamp t, where frequency is in Hz, decay is in 1/s (larger values decay faster),
+and t is in seconds. Models resonant mechanical or electrical systems that ring down
+after excitation. Follows the standard create lifecycle and registers its vtable for
+model-number dispatch via the dttimeseries registry.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttimeseries_damped_sine.h" target="_blank">dtmc_base_library/include/dtmc_base/dttimeseries_damped_sine.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttimeseries_sine</code>&nbsp;&nbsp;&nbsp;Sinusoidal signal source implementing the dttimeseries facade.</summary>
+<p>Evaluates offset + amplitude * sin(2*pi * frequency * t) for a microsecond
+timestamp t converted to seconds. Frequency is in Hz; all three parameters
+are double-precision and set at configuration time.</p>
+<p>Provides a stateless, analytically exact periodic signal for test fixtures and
+signal-processing pipelines. Each read is a direct formula evaluation with no
+accumulated state, so arbitrary timestamps can be queried in any order without
+drift.</p>
+<p>Follows the standard create/configure/read lifecycle and registers its
+vtable for polymorphic dispatch alongside other dttimeseries backends.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttimeseries_sine.h" target="_blank">dtmc_base_library/include/dtmc_base/dttimeseries_sine.h</a></p>
+</details>
+<details class="note">
+<summary><code>dttimeseries_steady</code>&nbsp;&nbsp;&nbsp;Constant-value time series implementing the dttimeseries facade.</summary>
+<p>Returns a fixed double value for any timestamp query, providing a simple
+baseline or placeholder in signal-processing pipelines that consume
+dttimeseries handles. Follows the standard create lifecycle and registers
+its vtable for model-number dispatch via the dttimeseries registry.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dttimeseries_steady.h" target="_blank">dtmc_base_library/include/dtmc_base/dttimeseries_steady.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtuart_helpers</code>&nbsp;&nbsp;&nbsp;UART parameter types with validation and string conversion.</summary>
+<p>Defines enumerations for parity, data bits, stop bits, and flow control,
+each with an is_valid predicate and a to_string formatter. A unified
+dtuart_helper_config_t bundles all parameters alongside a baud rate; a
+validate function reports the first invalid field via dterr_t. Shared by
+UART-backed dtiox implementations across ESP-IDF, Zephyr, PicoSDK, and
+Linux backends.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/dtuart_helpers.h" target="_blank">dtmc_base_library/include/dtmc_base/dtuart_helpers.h</a></p>
+</details>
+<details class="note">
+<summary><code>dtmc_base</code>&nbsp;&nbsp;&nbsp;Library flavor and version identification macros.</summary>
+<p>Provides DTMC_BASE_VERSION string constants that identify the library build at runtime.
+Used by dtruntime and diagnostic routines to report the active library variant in environment tables and
+log output.</p>
+<p>This file is processed by tooling in the automated build system.
+It's important to maintain the structure and formatting of the version macros for compatibility with version parsing scripts.</p>
+<p><a href="https://github.com/david-erb/dtmc_base/blob/main/dtmc_base_library/include/dtmc_base/version.h" target="_blank">dtmc_base_library/include/dtmc_base/version.h</a></p>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.indexes", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
