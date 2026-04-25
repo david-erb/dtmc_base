@@ -1,0 +1,33 @@
+site_name: dtmc_base Library
+site_url: https://david-erb.github.io/dtmc_base/
+repo_url: https://github.com/david-erb/dtmc_base/blob/main
+theme:
+  name: material
+  features:
+  - navigation.sections
+  - navigation.indexes
+  - content.code.copy
+plugins:
+- search
+- macros:
+    include_dir: mkdocs
+markdown_extensions:
+- admonition
+- attr_list
+- toc
+- pymdownx.details
+- pymdownx.highlight
+- pymdownx.superfences
+- pymdownx.snippets:
+    check_paths: true
+    base_path: .
+- tables
+validation:
+  links:
+    not_found: ignore
+extra_css:
+- stylesheets/extra.css
+nav:
+- Home: index.md
+- API Reference:
+  - Functions: functions/index.md

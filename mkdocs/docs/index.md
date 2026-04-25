@@ -2,6 +2,8 @@
 
 Portable C building blocks for embedded firmware and host tooling — concurrency primitives, networking abstractions, and small algorithms — designed to compile cleanly across **Zephyr**, **RTOS**, and **Linux** without scattered `#ifdef`s.
 
+_Current release: v{{ dtmc_base_version }}_
+
 `dtmc_base` is part of the **[Embedded Applications Lab](https://david-erb.github.io/embedded)** — a set of working applications based on a set of reusable libraries across MCU, Linux, and RTOS targets.
 
 ---
