@@ -43,6 +43,8 @@ dthttpd_get_vtable(int32_t model_number, dthttpd_vt_t** out)
 DTVTABLE_DISPATCH(dthttpd, loop, DTHTTPD_LOOP_ARGS, DTHTTPD_LOOP_PARAMS, dterr_t*)
 DTVTABLE_DISPATCH(dthttpd, stop, DTHTTPD_STOP_ARGS, DTHTTPD_STOP_PARAMS, dterr_t*)
 DTVTABLE_DISPATCH(dthttpd, join, DTHTTPD_JOIN_ARGS, DTHTTPD_JOIN_PARAMS, dterr_t*)
+DTVTABLE_DISPATCH(dthttpd, set_callback, DTHTTPD_SET_CALLBACK_ARGS, DTHTTPD_SET_CALLBACK_PARAMS, dterr_t*)
+DTVTABLE_DISPATCH(dthttpd, concat_format, DTHTTPD_CONCAT_FORMAT_ARGS, DTHTTPD_CONCAT_FORMAT_PARAMS, dterr_t*)
 
 void
 dthttpd_dispose(dthttpd_handle h)

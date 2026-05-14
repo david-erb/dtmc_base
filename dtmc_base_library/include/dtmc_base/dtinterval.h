@@ -4,9 +4,7 @@
  * Defines a vtable interface for a repeating interval timer: bind a callback,
  * start firing, and pause. The opaque handle and global registry allow
  * concrete implementations (wall-clock scheduled, ESP-IDF timer, Zephyr
- * timer) to be selected at initialization. The callback receives a context
- * pointer and a should_pause output flag, enabling self-cancellation without
- * external coordination.
+ * timer) to be selected at initialization.
  *
  * cdox v1.0.2
  */

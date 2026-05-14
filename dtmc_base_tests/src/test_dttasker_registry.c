@@ -18,7 +18,7 @@
 #define TAG "test_dtmc_base_dttasker_registry"
 
 // comment out the logging here
-// #define dtlog_debug(TAG, ...)
+#define dtlog_debug(TAG, ...)
 
 // -------------------------------------------------------------------------------
 // tasks's operating variables

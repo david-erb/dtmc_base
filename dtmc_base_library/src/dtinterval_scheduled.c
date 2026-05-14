@@ -61,7 +61,7 @@ dtinterval_scheduled_init(dtinterval_scheduled_t* self)
     DTERR_ASSERT_NOT_NULL(self);
 
     memset(self, 0, sizeof(*self));
-    self->model_number = DTMC_BASE_CONSTANTS_INTERVAL_MODEL_ESPIDF;
+    self->model_number = DTMC_BASE_CONSTANTS_INTERVAL_MODEL_SCHEDULED;
 
     // set the vtable for this model number
     DTERR_C(dtinterval_set_vtable(self->model_number, &dtinterval_scheduled_vt));

@@ -14,7 +14,7 @@
 #define TAG "test_dtmc_base_dtsemaphore"
 
 // If you want it silent during CI:
-#define dtlog_info(TAG, ...)
+#define dtlog_debug(TAG, ...)
 
 // -------------------------------------------------------------------------------
 // task's operating variables

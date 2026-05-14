@@ -19,7 +19,7 @@
 #include <dtmc_base/dtbusywork.h>
 
 #define TAG "dtbusywork"
-// #define dtlog_debug(TAG, ...)
+#define dtlog_debug(TAG, ...)
 
 // structure one for each worker
 typedef struct dtbusywork_worker_t
@@ -41,18 +41,14 @@ typedef struct dtbusywork_manager_t
     dttasker_registry_t tasker_registry;
 } dtbusywork_manager_t;
 
-static char*
-_worker_to_string(const dtbusywork_worker_t* worker, char* str, int32_t str_size)
+#ifndef dtlog_debug
+static const char*
+_worker_to_string(dtbusywork_worker_t* worker, char* buffer, size_t buffer_size)
 {
-    snprintf(str,
-      str_size,
-      "worker @%p #%" PRId32 " \"%s\" task %p",
-      worker,
-      worker->worker_number,
-      worker->worker_name,
-      worker->tasker_handle);
-    return str;
+    snprintf(buffer, buffer_size, "%s (worker_number=%" PRId32 ")", worker->worker_name, worker->worker_number);
+    return buffer;
 }
+#endif
 
 // -------------------------------------------------------------------------------
 // this executes the background busy work
@@ -105,7 +101,7 @@ dtbusywork__tasker_entrypoint(void* self_arg, dttasker_handle tasker_handle)
     }
 
 cleanup:
-    dtlog_debug(TAG, "dtbusywork worker %s exiting", _worker_to_string(self, worker_str, sizeof(worker_str)));
+    dtlog_debug(TAG, "dtbusywork %s exiting", _worker_to_string(self, worker_str, sizeof(worker_str)));
 
     return dterr;
 }

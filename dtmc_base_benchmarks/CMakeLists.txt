@@ -8,9 +8,18 @@ endif()
 if (ZEPHYR_BASE OR DEFINED Zephyr_FOUND)
     zephyr_library_named(dtmc_base_benchmarks)
     zephyr_library_sources(${MY_SOURCES})
-    target_include_directories(dtmc_base_benchmarks PUBLIC ${DTMC_BASE_DIR}/dtmc_base_benchmarks/include)
-    target_link_libraries(dtmc_base_benchmarks PUBLIC dtmc_base_library)
-    
+
+    zephyr_library_include_directories(
+        ${DTMC_BASE_DIR}/dtmc_base_benchmarks/include
+        ${DTMC_BASE_DIR}/dtmc_base_library/include
+        ${DTCORE_DIR}/dtcore_library/include
+    )
+
+    zephyr_library_link_libraries(
+        dtmc_base_library
+        dtcore_library
+    )
+
 # ---- ESP-IDF -------------------------------------------------
 elseif(DEFINED ENV{IDF_PATH})
     idf_component_register(

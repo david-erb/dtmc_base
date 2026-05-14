@@ -68,8 +68,10 @@ enums:
         value: 1
       - name: ESPIDF
         value: 2
-      - name: ZEPHYR
+      - name: ZEPHYR_KTIMER
         value: 3
+      - name: ZEPHYR_COUNTER
+        value: 4
 
   - name: NETPORTAL_MODEL
     base_constant: NETPORTAL_MODEL_NUMBER_START

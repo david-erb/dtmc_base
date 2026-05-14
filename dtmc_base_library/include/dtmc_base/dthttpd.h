@@ -15,6 +15,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <dtcore/dtbuffer.h>
 #include <dtcore/dterr.h>
 #include <dtcore/dttimeout.h>
 
@@ -54,17 +55,15 @@ typedef struct dthttpd_handle_t* dthttpd_handle;
 // POST callback
 //
 // Ownership model:
-// - payload is owned by the server and valid only during the callback.
-// - *out_response must be heap memory if non-NULL.
-// - ownership of *out_response transfers to the server.
-// - out_response_size is required if out_response is non-NULL.
+// - payload is owned by the server; the pointer is valid only for the duration
+//   of the callback. payload->length is 0 when the request body is empty.
+// - *out_response must be allocated via dtbuffer_create() if non-NULL.
+// - ownership of *out_response transfers to the server, which disposes it.
 
 typedef dterr_t* (*dthttpd_post_callback_t)(void* callback_context,
   const char* request_path,
-  void* payload,
-  int32_t payload_size,
-  void** out_response,
-  int32_t* out_response_size,
+  const dtbuffer_t* payload,
+  dtbuffer_t** out_response,
   const char** out_content_type,
   int32_t* out_status_code);
 
@@ -80,12 +79,20 @@ typedef dterr_t* (*dthttpd_post_callback_t)(void* callback_context,
 #define DTHTTPD_JOIN_ARGS , dttimeout_millis_t timeout_millis, bool *was_timeout
 #define DTHTTPD_JOIN_PARAMS , timeout_millis, was_timeout
 
+#define DTHTTPD_SET_CALLBACK_ARGS , dthttpd_post_callback_t callback, void* context
+#define DTHTTPD_SET_CALLBACK_PARAMS , callback, context
+
+#define DTHTTPD_CONCAT_FORMAT_ARGS , char *in_str, char *separator, char **out_str
+#define DTHTTPD_CONCAT_FORMAT_PARAMS , in_str, separator, out_str
+
 // -----------------------------------------------------------------------------
 // Vtable
 
 typedef dterr_t* (*dthttpd_loop_fn)(void* self DTHTTPD_LOOP_ARGS);
 typedef dterr_t* (*dthttpd_stop_fn)(void* self DTHTTPD_STOP_ARGS);
 typedef dterr_t* (*dthttpd_join_fn)(void* self DTHTTPD_JOIN_ARGS);
+typedef dterr_t* (*dthttpd_set_callback_fn)(void* self DTHTTPD_SET_CALLBACK_ARGS);
+typedef dterr_t* (*dthttpd_concat_format_fn)(void* self DTHTTPD_CONCAT_FORMAT_ARGS);
 typedef void (*dthttpd_dispose_fn)(void* self);
 
 typedef struct dthttpd_vt_t
@@ -93,6 +100,8 @@ typedef struct dthttpd_vt_t
     dthttpd_loop_fn loop;
     dthttpd_stop_fn stop;
     dthttpd_join_fn join;
+    dthttpd_set_callback_fn set_callback;
+    dthttpd_concat_format_fn concat_format;
     dthttpd_dispose_fn dispose;
 } dthttpd_vt_t;
 
@@ -109,6 +118,8 @@ dthttpd_get_vtable(int32_t model_number, dthttpd_vt_t** vtable);
     extern dterr_t* NAME##_loop(NAME##T self DTHTTPD_LOOP_ARGS);                                                               \
     extern dterr_t* NAME##_stop(NAME##T self DTHTTPD_STOP_ARGS);                                                               \
     extern dterr_t* NAME##_join(NAME##T self DTHTTPD_JOIN_ARGS);                                                               \
+    extern dterr_t* NAME##_set_callback(NAME##T self DTHTTPD_SET_CALLBACK_ARGS);                                               \
+    extern dterr_t* NAME##_concat_format(NAME##T self DTHTTPD_CONCAT_FORMAT_ARGS);                                             \
     extern void NAME##_dispose(NAME##T self);
 
 // declare dispatcher
@@ -126,5 +137,7 @@ DTHTTPD_DECLARE_API_EX(dthttpd, _handle)
         .loop = (dthttpd_loop_fn)NAME##_loop,                                                                                  \
         .stop = (dthttpd_stop_fn)NAME##_stop,                                                                                  \
         .join = (dthttpd_join_fn)NAME##_join,                                                                                  \
+        .set_callback = (dthttpd_set_callback_fn)NAME##_set_callback,                                                          \
+        .concat_format = (dthttpd_concat_format_fn)NAME##_concat_format,                                                       \
         .dispose = (dthttpd_dispose_fn)NAME##_dispose,                                                                         \
     }
